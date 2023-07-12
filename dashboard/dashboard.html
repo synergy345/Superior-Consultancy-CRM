@@ -1,0 +1,1369 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="ZprxWVDLTRCw5kHDKJFzqNBqCn96I57VfmS6mPKm">
+    <title> Superior Consulting CRM - Dashboard</title>
+    <link rel="shortcut icon" href="../assets/images/superior-consulting.ico" type="image/x-icon" >
+    <!-- Delete alert text-->
+    <input type="hidden" name="alert_subtitle" id="alert_subtitle" value="You want to complete this record?">
+    <input type="hidden" name="alert_deltitle" id="alert_deltitle" value="You want to delete this record?">
+    <input type="hidden" name="alert_active" id="alert_active" value="You want to active this record?">
+    <input type="hidden" name="alert_inactive" id="alert_inactive" value="You want to inactive this record?">
+    <input type="hidden" name="alert_yes_btn" id="alert_yes_btn" value="Yes, delete it!">
+    <input type="hidden" name="alert_cancel_btn" id="alert_cancel_btn" value="Cancel">
+    <input type="hidden" name="alert_row" id="alert_row" value="Please select at least one row">
+    <meta name="keywords"
+        content="attendance, finance, hr management, employee, hrm, HRM management system, human, laravel, leave,office, office-attendance, php, report, resource">
+    <meta name="description" content="Onest HRM Human Resource Management System Website ">
+        <meta name="base-url" id="base-url" content="https://crmv1.onestweb.com">
+    <meta name="deleteText" id="deleteText" content="Delete">
+    <meta name="editText" id="editText" content="Edit">
+    <meta name="cancelText" id="cancelText" content="Cancel">
+    <meta name="yesText" id="yesText" content="Yes">
+    <meta name="noText" id="noText" content="No">
+
+
+
+    
+    <link rel="shortcut icon" href="https://crmv1.onestweb.com/assets/favicon.png" type="image/x-icon" >
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <!-- Line Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+
+     
+    <!--  Bootstrap 5 -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+     
+
+    <!-- Metis Menu -->
+    <link rel="stylesheet" href="../css/metis-menu.min.css">
+    <!-- Apex Chart -->
+    <link rel="stylesheet" href="../css/apexcharts.min.css">
+    <!-- date ranger -->
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <!-- Input Tags -->
+    <link rel="stylesheet" href="../css/tagsinput.css">
+    <!-- Line Icons -->
+    <link rel="stylesheet" href="../css/lineicons.css">
+    <!-- RTL -->
+    
+    <!-- scrollbar -->
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+    <!-- Sweet alert -->
+    <link rel="stylesheet" href="../css/sweet-alert.min.css">
+    <!-- select2 -->
+    <link rel="stylesheet" href="../css/select2.min.css">
+    <!-- toaster -->
+    <link rel="stylesheet" href="../css/toastr.css">
+
+    <link rel="stylesheet" href="../css/daterangepicker.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fullcalendar.css" />
+    <link rel="stylesheet" href="../css/tempus-dominus.min.css" />
+    
+    </head>
+
+<body class="default-theme">
+    
+    <input type="text" hidden value="https://crmv1.onestweb.com" id="url">
+    <input type="text" hidden value="Onest CRM" id="site_name">
+    <input type="text" hidden value="h" id="time_format">
+    <input type="text" hidden value="2023/07/12" id="defaultDate">
+    <input type="hidden" id="get_custom_user_url" value="https://crmv1.onestweb.com/dashboard/user/get-users">
+    <input hidden value="Select Employee" id="select_custom_members">
+    <input hidden value="2" id="fire_base_authenticate">
+    <input hidden value="Are you sure?" id="are_you_sure">
+    <input hidden value="You want to delete this record?" id="you_want_delete">
+    <input hidden value="Something went wrong" id="something_wrong">
+    <input hidden value="Yes" id="yes">
+    <input hidden value="Cancel" id="cancel">
+    <input hidden value="$" id="currency_symbol">
+    <input hidden value="No data found !" id="nothing_show_here">
+    <div id="layout-wrapper">
+        <header class="header">
+            <div class="header_control_left d-flex gap-2 align-items-center">
+                <button class="half-expand-toggle sidebar-toggle d-none d-lg-flex align-items-center justify-content-center ">
+                    <i class="las la-angle-double-left"></i>
+                </button>
+                <div class="header-search tab-none">
+                    <div class="search-icon">
+                        <i class="las la-search"></i>
+                    </div>
+                    <input class="search-field ot_input" id="search_field" type="text" placeholder="Search Page" onkeyup="searchMenu()">
+                    <div id="autoCompleteData" class="d-none">
+                        <ul class="search_suggestion"></ul>
+                    </div>
+                </div>
+            </div>
+            <button class="close-toggle sidebar-toggle">
+                <img src="https://crmv1.onestweb.com/assets/images/icons/hammenu-2.svg" alt="">
+            </button>
+            <div class="header-controls flex-fill justify-content-end">
+                <!-- language dropdown  -->
+                <div class="header-control-item">
+                    <div class="single-select d-none d-lg-block">
+                        <input type="hidden" id="change_lang_url" value="https://crmv1.onestweb.com/dashboard/ajax-lang-change">
+                        <select name="user_lang" class="language-select" id="change-user-lang">
+                            <option value="en" selected>English</option>
+                            <option value="ar" >Arabic</option>
+                            <option value="es" >Spanish</option>
+                            <option value="az" >Azerbaijani</option>
+                            <option value="be" >Belarusian</option>
+                            <option value="de" >German</option>
+                            <option value="ru" >Russian</option>
+                            <option value="tr" >Turkish</option>
+                            <option value="55" >Português</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="dropdown theme_dropdown">
+                    <a id="button" class="btn " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item active theme_list " data-theme-style="default-theme"> <i class="lar la-sun"></i> Light</li>
+                        <li class="dropdown-item theme_list" data-theme-style="dark-theme"> <i class="lar la-moon"></i> Dark</li>
+                    </ul>            
+                </div>
+                <div class="header-control-item md-none">
+                    <div class="item-content dropdown  ">
+                        <button class="header_square_box" onclick="javascript:screenToggle()">
+                            <i class="expand_icon las la-expand"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- checkin checkout  -->
+                <div class="header-control-item ">
+                    <div class="item-content d-flex align-items-center">
+                        <div class="d-flex  align-items-between cursor-pointer pointer gap-2 " role="navigation" id="topbar_messages" aria-expanded="false">
+                            <a id="demo" onclick="viewModal(`https://crmv1.onestweb.com/dashboard/ajax-checkin-modal`)" class="header_square_box checkin d-flex align-items-center">
+                                <span class="checkin-btn"><i class="las la-sign-in-alt"></i></span>
+                            </a>                                                  
+                        </div>
+                    </div>
+                </div>
+                <div class="header-control-item  d-none d-lg-block">
+                    <div class="item-content">
+                        <button class="header_square_box" type="button" id="topbar_notifications" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="las la-bell"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end topbar-dropdown-menu ot-card pv-32 ph-16 topbar_notifications" aria-labelledby="topbar_notifications">
+                            <div class="topbar-dropdown-header">
+                                <h1>Notifications</h1>
+                            </div>
+                            <div class="topbar-dropdown-content">
+                                <p>No Notification Found</p>
+                                <div class="d-flex align-items-center">
+                                    <a class="topbar-dropdown-footer ot-btn-primary w-100 " href="https://crmv1.onestweb.com/hrm/notification">See All Notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- header__profile  -->
+                <div class="header-control-item header__profile">
+                    <div class="item-content">
+                        <div class="profile-navigate mt-0 cursor-pointer " id="profile_expand" data-bs-toggle="dropdown" role="navigation">
+                            <div class="profile-photo">
+                                <img src="https://crmv1.onestweb.com/public/uploads/user/202306261909blank_small.png" alt="profile">
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-end profile-expand-dropdown top-navbar-dropdown-menu ot-card pa-0" aria-labelledby="profile_expand">
+                            <div class="profile-expand-container">
+                                <div class="profile-expand-list d-flex flex-column">
+                                    <div class="d-flex gap-3 align-items-center profile_inner_img profile-border">
+                                        <div class="thumb">
+                                            <img class="img-fluid" src="https://crmv1.onestweb.com/public/uploads/user/202306261909blank_small.png" alt="profile">
+                                        </div>
+                                        <div class="profile-info align-items-end">
+                                            <span>Admin</span>
+                                            <h6> Chairman, Company 02</h6>
+                                        </div>
+                                    </div>
+                                    <a class="profile-expand-item " href="https://crmv1.onestweb.com/dashboard/profile/personal">
+                                        <span><i class="las la-user-alt"></i> My Profile</span>
+                                    </a>
+                                    <a class="profile-expand-item" href="https://crmv1.onestweb.com/hrm/notification" >
+                                        <span><i class="las la-bell"></i>Notification</span>
+                                    </a>
+                                    <a class="profile-expand-item " href="https://crmv1.onestweb.com/dashboard/profile/settings">
+                                        <span><i class="las la-cog"></i> Settings</span>
+                                    </a>
+                                    <div class="profile-border p-0"></div>
+                                    <a class="profile-expand-item " href="https://crmv1.onestweb.com/dashboard/logout">
+                                        <span>Logout</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <a href="https://crmv1.onestweb.com/dashboard" class="img-tag sidebar_logo">
+                        <img class="full-logo  dark_logo " src="../assets/images/logo.png" alt="dark_logo" >
+                        <img class="full-logo  white_logo d-none" src="https://crmv1.onestweb.com/assets/images/white.png" alt="" >
+                        <img class="half-logo" src="https://crmv1.onestweb.com/assets/images/favicon.png" alt="Icon">
+                    </a>
+                </div>
+                <button class="half-expand-toggle sidebar-toggle d-none">
+                    <i class="las la-bars"></i>
+                </button>
+                <button class="close-toggle sidebar-toggle">
+                    <i class="las la-chevron-left"></i>
+                </button>
+            </div>
+            <div id="sidebar_scroll" class="sidebar-menu sidebar_scrollbar_active">
+                <div class="sidebar-menu-section">
+                    <!-- parent menu list start  -->
+                    <ul class="sidebar-dropdown-menu parent-menu-list">
+                        <li class="sidebar-menu-item">
+                            <a href="dashboard.html" class="parent-item-content ">
+                                <i class="las la-home "></i>
+                                <span class="on-half-expanded">Dashboard</span>
+                            </a>
+                        </li>       
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/admin/project">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                <i class="las la-user-friends"></i>
+                                <span class="on-half-expanded">Clients</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/client/create" >
+                                        <span> Add Client</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/client" >
+                                        <span> Client Lists</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/admin/project">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow  in-active">
+                                <i class="lab la-product-hunt"></i>
+                                <span class="on-half-expanded">Projects</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/project/create">
+                                        <span> Project Create</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/project">
+                                        <span> Project List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>                
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/admin/task">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                <i class="las la-tasks"></i>
+                                <span class="on-half-expanded">Tasks</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/task/create">
+                                        <span> Task Create</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/task">
+                                        <span> Task List</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>                    
+                        <!-- start Sales -->
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/sale/product/category/list?saleProductBrand.index">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow  in-active">
+                                <i class="las la-chart-pie"></i>
+                                <span class="on-half-expanded">Sales</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <!-- start Products -->
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/sale/product/category/list?saleProductBrand.index">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Products</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <!-- start Category -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/category/list" class="  ">
+                                                <span>Category</span>
+                                            </a>
+                                        </li>
+                                        <!-- end Category -->
+                                        <!-- start brand -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/brand/list" class="  ">
+                                                <span>Brand</span>
+                                            </a>
+                                        </li>
+                                        <!-- end brand -->
+                                        <!-- start Unit -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/unit/list" class="  ">
+                                                <span>Unit</span>
+                                            </a>
+                                        </li>
+                                        <!-- end Unit -->
+                                        <!-- start Tax -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/tax/list" class="  ">
+                                                <span>Tax</span>
+                                            </a>
+                                        </li>
+                                        <!-- end Tax -->
+                                        <!-- start Warehouse -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/warehouse/list" class="  ">
+                                                <span>Warehouse</span>
+                                            </a>
+                                        </li>
+                                        <!-- end Warehouse -->
+                                        <!-- start Customer -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/customer/list" class="  ">
+                                                <span>Customer</span>
+                                            </a>
+                                        </li>
+                                        <!-- end Customer -->
+                                        <!-- start supplier -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/supplier/list" class="  ">
+                                                <span>Supplier</span>
+                                            </a>
+                                        </li>
+                                        <!-- end supplier -->
+                                        <!-- start Product Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/product/list" class="  ">
+                                                <span>Product List</span>
+                                            </a>
+                                        </li>
+                                        <!-- end Product Menu -->
+                                        <!-- Start: Add Product List Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/product/create" class="  ">
+                                                <span>Add Product</span>
+                                            </a>
+                                        </li>
+                                        <!-- End: Add Product List Menu -->
+                                        <!-- Start: Print Barcode Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/products/print_barcode" class="  ">
+                                                <span>Print Barcode</span>
+                                            </a>
+                                        </li>
+                                        <!-- End: Print Barcode Menu -->
+                                        <!-- Start: Adjustment Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/adjustment/list" class="  ">
+                                                <span>Adjustment List</span>
+                                            </a>
+                                        </li>
+                                        <!-- End: Adjustment List Menu -->
+                                        <!-- Start: Stock Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/product/stock-count/list" class="  ">
+                                                <span>Stock Count</span>
+                                            </a>
+                                        </li>
+                                        <!-- End: Stock Menu -->
+                                    </ul>
+                                </li>
+                                <!-- End Product Menu -->
+                                <!-- Start Purchase -->
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/sale/purchase/list?salePurchase.create">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded"> Purchase</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <!--  Start Purchase List menu  -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/purchase/list" class="  ">
+                                                <span>Purchase List</span>
+                                            </a>
+                                        </li>
+                                        <!-- Start Purchase List menu  -->
+                                        <!-- Start: Purchase Import menu  -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/purchase/purchase_by_csv" class="  ">
+                                                <span>Import Purchase By CSV</span>
+                                            </a>
+                                        </li>
+                                        <!-- END: Purchase Import menu  -->
+                                    </ul>
+                                </li>
+                                <!-- End Purchase -->
+                                <!-- Start Sale -->
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/sale/sale/list?saleSale.create">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Sale</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <!-- Start Sale list /saleSale.index -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/sale/list" class="  ">
+                                                <span>Sale List</span>
+                                            </a>
+                                        </li>
+                                        <!-- End Sale list -->
+                                        <!-- Start POS list /saleSale.pos -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/sale/pos" class="  ">
+                                                <span>POS</span>
+                                            </a>
+                                        </li>
+                                        <!-- End POS list -->
+                                        <!-- Start Add Sale list /saleSale.create -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/sale/create" class="  ">
+                                                <span>Add Sale</span>
+                                            </a>
+                                        </li>
+                                        <!-- End Add Sale list -->
+                                        <!-- Start: Gift Card Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/sale/giftcard/list" class="  ">
+                                                <span>Gift Card List</span>
+                                            </a>
+                                        </li>
+                                        <!-- END: Gift Card Menu -->
+                                        <!-- Start: Coupon List Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/sale/coupon/list" class="  ">
+                                                <span>Coupon List</span>
+                                            </a>
+                                        </li>
+                                        <!-- END: Coupon List Menu -->
+                                        <!-- Start: Delivery List Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/sale/delivery/list" class="  ">
+                                                <span>Delivery List</span>
+                                            </a>
+                                        </li>
+                                        <!-- END: Delivery List Menu -->
+                                    </ul>
+                                </li>
+                                <!-- End Sale -->
+                                <!-- Start Expense -->
+                                <li class="sidebar-menu-item  ">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Expense</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <!-- Start: Expense Category Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/expense/category/list" class="  ">
+                                                <span>Expense Category</span>
+                                            </a>
+                                        </li>
+                                        <!-- Start: Expense Category Menu -->
+                                        <!-- Start: Expense Category List Menu -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/expense/list" class="  ">
+                                                <span>Expense List</span>
+                                            </a>
+                                        </li>
+                                        <!-- Start: Expense Category List Menu -->
+                                    </ul>
+                                </li>
+                                <!-- End Expense -->
+                                <!-- Start Account -->
+                                <li class="sidebar-menu-item  ">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Account</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/account/list" class="  ">
+                                                <span>Account List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End Account -->
+                                <!-- Start Biller -->
+                                <li class="sidebar-menu-item  ">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Biller</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/biller/list" class="  ">
+                                                <span>Biller List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End Biller -->
+                                <!-- Start Quotation -->
+                                <li class="sidebar-menu-item ">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Quotation</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/quotation/list" class="  ">
+                                                <span>Quotation List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- End Quotation -->
+                                <!-- Start Transfer -->
+                                <li class="sidebar-menu-item ">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Transfer</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <!--  Start Tranfer List menu  -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/transfer/list" class="  ">
+                                                <span>Transfer List</span>
+                                            </a>
+                                        </li>
+                                        <!-- Start Tranfer List menu  -->
+                                    </ul>
+                                </li>
+                                <!-- End Tranfer -->
+                                <!-- Start Return -->
+                                <li class="sidebar-menu-item ">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Return</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <!--  Start Return menu  -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/return-sale/list" class="  ">
+                                                <span>Sale List</span>
+                                            </a>
+                                        </li>
+                                        <!-- Start Return menu  -->
+                                        <!-- Start Return menu  -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/sale/return-purchase/list" class="  ">
+                                                <span>Purchase List</span>
+                                            </a>
+                                        </li>
+                                        <!-- END Return menu  -->
+                                    </ul>
+                                </li>
+                                <!-- End Return -->
+                            </ul>
+                        </li>
+                        <!-- End Sale -->        
+                        <!-- start bookings -->
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/booking/service/list">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow  in-active">
+                                <i class="las la-chart-pie"></i>
+                                <span class="on-half-expanded">Bookings</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <!-- Start service -->
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/booking/service/list">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="on-half-expanded">Service</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <!--  Start service List menu  -->
+                                        <li class="sidebar-menu-item third-menu-child in-active">
+                                            <a href="https://crmv1.onestweb.com/booking/service/list" class="  ">
+                                                <span>Service List</span>
+                                            </a>
+                                        </li>
+                                        <!-- Start service List menu  -->
+                                    </ul>
+                                </li>
+                                <!-- End service -->
+                            </ul>
+                        </li>
+                        <!-- End booking -->
+                        <!-- Start:: Lead Management -->
+                        <!-- start lead parent sidebar menu  -->
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/admin/leadshttps://crmv1.onestweb.com/admin/sources">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                <i class="las la-user-friends"></i>
+                                <span class="on-half-expanded">Leads</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <!-- start lead type sidebar menu  -->
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/types">
+                                        <span> Lead Types</span>
+                                    </a>
+                                </li>
+                                <!-- end source sidebar menu  -->
+                                <!-- start lead type sidebar menu  -->
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/sources">
+                                        <span> Lead Sources</span>
+                                    </a>
+                                </li>
+                                <!-- end source sidebar menu  -->
+                                <!-- start lead status sidebar menu  -->
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/statuses">
+                                        <span> Lead Status</span>
+                                    </a>
+                                </li>
+                                <!-- end source sidebar menu  -->
+                                <!-- start lead sidebar menu  -->
+                                <li class="sidebar-menu-item in-active">
+                                    <a href="https://crmv1.onestweb.com/admin/leads">
+                                        <span> Leads</span>
+                                    </a>
+                                </li>
+                                <!-- end lead sidebar menu  -->
+                            </ul>
+                        </li>
+                        <!-- end lead parent sidebar menu  -->                    
+                        <!-- End:: Lead Management -->
+                        <!-- Start:: Human Resource Menu -->
+                        <li class="sidebar-menu-item ">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                <i class="las la-user"></i>
+                                <span class="on-half-expanded">Human Resource</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <li class="sidebar-menu-item">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-tools"></i>
+                                        <span class="on-half-expanded">HR Setup</span>
+                                    </a>
+                                    <ul class="child-menu-list  ">
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/designation" class="  ">
+                                                <span>Designations</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/department" class="  ">
+                                                <span>Departments</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/roles" class=" ">
+                                                <span>Roles</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/company-setup/configuration" class=" ">
+                                                <span>Configurations</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/weekend/setup" class=" ">
+                                                <span>Weekend Setup</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/holiday/setup" class=" in-active">
+                                                <span>Holiday Setup</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/shift" class=" ">
+                                                <span>Shift Setup</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/duty/schedule" class=" in-active">
+                                                <span>Duty Schedule</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/ip-whitelist" class="">
+                                                <span>IP Whiltelist</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/location" class="">
+                                                <span>Locations</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/company-setup/activation" class="">
+                                                <span>Activation</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item ">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-user-alt"></i>
+                                        <span class="on-half-expanded">Employees</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/dashboard/user/create" class=" ">
+                                                <span>Add Employee</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/dashboard/user" class=" ">
+                                                <span>Employee List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/leave">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-sign-out-alt"></i>
+                                        <span class="on-half-expanded">Leaves</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/leave" class=" ">
+                                                <span>Type</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/leave/assign" class=" ">
+                                                <span> Assign Leave</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/leave/request" class=" ">
+                                                <span>Leave Request</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/attendance">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-user-check"></i>
+                                        <span class="on-half-expanded">Attendance</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/attendance" class=" ">
+                                                <span>Attendance</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- strat payroll_menu -->
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/payroll/item">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-comment-dollar"></i>
+                                        <span class="on-half-expanded">Payroll</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/payroll/item" class="">
+                                                <span> Commissions</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/payroll/setup" class="">
+                                                <span> Setup</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/payroll/advance-type" class="">
+                                                <span> Advance Type</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/payroll/advance-salary" class="">
+                                                <span> Advance</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/payroll/salary" class="">
+                                                <span> Salary</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- end payroll_menu -->
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/admin/award">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-award"></i>
+                                        <span class="non-half-expanded">Awards</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/award/type">
+                                                <span> Award Type List</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/award">
+                                                <span> Award List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/admin/travel">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-route"></i>
+                                        <span class="on-half-expanded">Travels</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/travel/type">
+                                                <span> Type</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/travel">
+                                                <span> Travel List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-user-shield"></i>
+                                        <span class="on-half-expanded">Performance</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/performance/indicator">
+                                                <span> Indicator</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/performance/appraisal">
+                                                <span> Appraisal</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/performance/goal">
+                                                <span> Goal</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item https://crmv1.onestweb.com/admin/performance/settings/competence-type ">
+                                            <a href="javascript:void(0)" class="parent-item-content has-arrow nav-item in-active">
+                                                <span class="">Settings</span>
+                                            </a>
+                                            <ul class="child-menu-list  pl-2">
+                                                <li class="nav-item in-active">
+                                                    <a href="https://crmv1.onestweb.com/admin/performance/settings/competence-type">
+                                                        <span> Competence Type</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item in-active">
+                                                    <a href="https://crmv1.onestweb.com/admin/performance/settings/competence">
+                                                        <span> Competencies</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item in-active">
+                                                    <a href="https://crmv1.onestweb.com/admin/performance/settings/goal-type">
+                                                        <span> Goal Type</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-handshake"></i>
+                                        <span class="on-half-expanded">Meeting</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="sidebar-menu-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/meeting">
+                                                <span> Meeting List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/appointment?appointment.create">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow  in-active">
+                                        <i class="las la-calendar-check"></i>
+                                        <span class="on-half-expanded">Appointment</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/appointment" class="  ">
+                                                <span>List</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/visit">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <i class="las la-map-marked-alt"></i>
+                                        <span class="on-half-expanded">Visit</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/visit" class="">
+                                                <span>Manage visit</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END HR Menu Item -->
+                        <!-- End:: Human Resource Menu -->
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/accounts?hrm.accounts.create">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                <i class="las la-file-invoice-dollar"></i>
+                                <span class="on-half-expanded">Accounts</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <li class="nav-item in-active">
+                                    <a href="https://crmv1.onestweb.com/hrm/accounts" class="">
+                                        <span> Account List</span>
+                                    </a>
+                                </li>                
+                                <li class="nav-item in-active">
+                                    <a href="https://crmv1.onestweb.com/hrm/deposit" class="">
+                                        <span> Deposit</span>
+                                    </a>
+                                </li>                
+                                <li class="nav-item in-active">
+                                    <a href="https://crmv1.onestweb.com/hrm/expenses" class="">
+                                        <span> Expense</span>
+                                    </a>
+                                </li>                
+                                <li class="nav-item in-active">
+                                    <a href="https://crmv1.onestweb.com/hrm/transactions" class="">
+                                        <span> Transaction History</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/account-settings/expense">
+                                    <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                        <span class="-text font-purple">Accounts Settings</span>
+                                    </a>
+                                    <ul class="child-menu-list ">
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/account-settings/deposit" class="">
+                                                <span> Deposit Category</span>
+                                            </a>
+                                        </li>  
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/account-settings/expense" class="">
+                                                <span> Expense Category</span>
+                                            </a>
+                                        </li>                    
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/hrm/payment-methods" class="">
+                                                <span> Payment Method</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item in-active">
+                                            <a href="https://crmv1.onestweb.com/admin/client/contract-type" class="">
+                                                <span> Contract Type</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                            </ul>
+                        </li>
+                        <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/support/ticket/list?supportTicket.create">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                <i class="las la-ticket-alt"></i>
+                                <span class="on-half-expanded">Support</span>
+                            </a>
+                            <ul class="child-menu-list ">
+                                <li class="nav-item in-active">
+                                    <a href="https://crmv1.onestweb.com/hrm/support/ticket/create" class="">
+                                        <span> Create Ticket</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item in-active">
+                                    <a href="https://crmv1.onestweb.com/hrm/support/ticket/list" class="">
+                                        <span> Tickets</span> 
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-menu-item  https://crmv1.onestweb.com/dashboard/announcement/notice?notice.create ">
+                            <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                                <i class="las la-bullhorn"></i>
+                                <span class="on-half-expanded">Announcement</span>
+                            </a>
+                            <ul class="child-menu-list  ">
+                            <li class="nav-item  in-active ">
+                                <a href="https://crmv1.onestweb.com/dashboard/announcement/notice/create" class="">
+                                <span>Create Notice</span> 
+                                <span class="badge badge-info d-none fs-6 p-s">5</span> </a>
+                            </li>
+                            <li class="nav-item  in-active ">
+                                <a href="https://crmv1.onestweb.com/dashboard/announcement/notice" class="">
+                                    <span>Notice</span> 
+                                </a>
+                            </li>
+                            <li class="nav-item d-none">
+                                <a href="#" class="">
+                                    <span>Send E-mail</span> 
+                                </a>
+                            </li>
+                            <li class="nav-item d-none">
+                                <a href="#" class="">
+                                    <span>Send Notification</span> 
+                                </a>
+                            </li>
+                        </ul>
+                    </li>    
+                    <li class="sidebar-menu-item d-none">
+                        <a href="https://crmv1.onestweb.com/admin/contact" class="parent-item-content in-active">
+                            <i class="las la-inbox"></i>
+                            <span class="on-half-expanded">Contacts</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item https://crmv1.onestweb.com/hrm/report/attendance">
+                        <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                            <i class="las la-clipboard-list"></i>
+                            <span class="on-half-expanded">Report</span>
+                        </a>
+                        <ul class="child-menu-list ">
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/hrm/report/live-tracking" class=" ">
+                                    <span>Live Tracking</span>
+                                </a>
+                            </li>
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/hrm/report/location-history" class=" ">
+                                    <span>Location History</span>
+                                </a>
+                            </li>    
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/hrm/report/attendance" class=" ">
+                                    <span>Attendance report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/hrm/break/list" class=" ">
+                                    <span>Break report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/hrm/expense/payment" class=" ">
+                                    <span>Payment Report</span>
+                                </a>
+                            </li>
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/hrm/report/visit" class="">
+                                    <span>Visit Reports</span>
+                                </a>
+                            </li>    
+                        </ul>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a href="javascript:void(0)" class="parent-item-content has-arrow in-active">
+                            <i class="las la-cog"></i>
+                            <span class="on-half-expanded">Settings</span>
+                        </a>
+                        <ul class="child-menu-list  ">
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/admin/settings" class=" ">
+                                    <span>General Settings</span>
+                                </a>
+                            </li>    
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/admin/settings/app-setting/dashboard" class=" ">
+                                    <span>App Setting</span>
+                                </a>
+                            </li>
+                            <li class="nav-item in-active">
+                                <a href="https://crmv1.onestweb.com/admin/settings/language-setup" class=" ">
+                                    <span>Language</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- parent menu list end  -->
+            </div>
+        </div>
+    </aside>
+    <main class="main-content ph-32 pt-100 pb-20" id="__index_ltn">
+        <div class="page-content">
+            <div class="d-flex justify-content-between flex-wrap dashboard-heading  align-items-center pb-24 gap-3">
+                <h3 class="mb-0 dashboard_welcome_title">Welcome to Onest CRM [Admin]</h3>
+                <div class="dropdown card-button">
+                    <button class="ot-dropdown-btn dropdown-toggle" type="button" id="revenueBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="__selected_dashboard">Company Dashboard</span>
+                        <i class="las la-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu c-dropdown-menu" aria-labelledby="revenueBtn">
+                        <li>
+                            <a class="dropdown-item profile_option" onclick="dashboardAdmin('My Dashboard')" href="javascript:void(0)">My Dashboard
+                                <input type="hidden" id="my_dashboard_used_for_translation" value="My Dashboard">
+                            </a>
+                            <a class="dropdown-item company_option" onclick="dashboardAdmin('Company Dashboard')" href="javascript:void(0)">Company Dashboard</a>
+                            <input type="hidden" id="company_dashboard_used_for_translation" value="Company Dashboard">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content p-0 mt-4">
+                <!-- SCROLLBAR_EVERY_TABLE  -->
+                <div class="__MyProfileDashboardView" id="__MyProfileDashboardView">
+                    <div class="row">
+                        <!-- Dashboard Summery Card Start -->
+                        <!-- Single Dashboard Summery Card Start-->
+                        <div class="col-12 col-sm-6 col-xs-6 col-md-4 col-lg-3 col-xl-3 pb-24 pl-12 pr-12">
+                            <div class="card summery-card ot-card h-100">
+                                <div class="card-heading d-flex align-items-center">
+                                    <div class="card-icon circle-success dashboard-card-icon">
+                                        <i class="las la-chart-pie"></i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4>Sales</h4>
+                                        <h1>00</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Dashboard Summery Card End-->
+                        <!-- Single Dashboard Summery Card Start-->
+                        <div class="col-12 col-sm-6 col-xs-6 col-md-4 col-lg-3 col-xl-3 pb-24 pl-12 pr-12">
+                            <div class="card summery-card ot-card h-100">
+                                <div class="card-heading d-flex align-items-center">
+                                    <div class="card-icon circle-warning dashboard-card-icon">
+                                        <i class="las la-chart-bar"></i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4>Revenue</h4>
+                                        <h1>00</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Dashboard Summery Card End-->
+                        <!-- Single Dashboard Summery Card Start-->
+                        <div class="col-12 col-sm-6 col-xs-6 col-md-4 col-lg-3 col-xl-3 pb-24 pl-12 pr-12">
+                            <div class="card summery-card ot-card h-100">
+                                <div class="card-heading d-flex align-items-center">
+                                    <div class="card-icon circle-lightseagreen dashboard-card-icon">
+                                        <i class="las la-chart-line"></i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4>Income</h4>
+                                        <h1>00</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Dashboard Summery Card End-->
+                        <!-- Single Dashboard Summery Card Start-->
+                        <div class="col-12 col-sm-6 col-xs-6 col-md-4 col-lg-3 col-xl-3 pb-24 pl-12 pr-12">
+                            <div class="card summery-card ot-card h-100">
+                                <div class="card-heading d-flex align-items-center">
+                                    <div class="card-icon circle-danger dashboard-card-icon">
+                                        <i class="las la-chart-area"></i>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4>Expenses</h4>
+                                        <h1>00</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Dashboard Summery Card End-->
+                        <div class="col-lg-6 col-xl-6 col-xxl-4 pl-12 pr-12">
+                            <div class="card statistic-card ot-card crm_height_full mb-6 card_scroll_active">
+                                <div class="card-header d-flex flex-row justify-content-between align-items-baseline">
+                                    <div class="card-title mb-20">
+                                        <h3>Summary</h3>
+                                        <input type="hidden" name="leadSummaryCategoryWise" id="lead_summary_category_wise_url" value="https://crmv1.onest.web.com/admin/ajax/lead-summary-category-wise">
+                                    </div>
+                                </div>
+                                <div class="card-body pt-0 mCustomScrollbar _mCS_2 mCS-autoHide mCS_touch_action" id="lead_summary_category_wise_body">
+                                    <div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0" style="max-height: none;">
+                                        <div id="mCSB_2_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+                                            <!-- single_Lead -->
+                                            <div class="d-flex align-items-center single_todo">
+                                                <div class="symbol symbol-50px">
+                                                    <span class="symbol-label circle-violet">
+                                                        <i class="las la-users fs-5"></i>
+                                                    </span>
+                                                </div>
+                                                <!-- begin::Description -->
+                                                <div class="flex-grow-1">
+                                                    <a href="#" class="todo_title">Total Employees</a>
+                                                </div>
+                                                <!-- end::Description -->
+                                                <span class="badge badge-light-success fs-8 fw-bold">+17</span>
+                                            </div>
+                                            <!-- single_Lead -->
+                                            <!-- single_Lead -->
+                                            <div class="d-flex align-items-center single_todo">
+                                                <div class="symbol symbol-50px">
+                                                    <span class="symbol-label circle-hotpink">
+                                                        <i class="las la-user-friends fs-5"></i>
+                                                    </span>
+                                                </div>
+                                                <!-- begin::Description -->
+                                                <div class="flex-grow-1">
+                                                    <a href="#" class="todo_title">Total Clients</a>
+                                                </div>
+                                                <!-- end::Description -->
+                                                <span class="badge badge-light-success fs-8 fw-bold">+12</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="user_slug" value="admin">
+            <input class="form-control" type="hidden" id="profileWiseDashboard" value="https://crmv1.onestweb.com/dashboard/profileWiseDashboard/2">
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="footer main-footer mt-3">
+            <p class="px-4">&copy; 2023 Onest CRM. All rights reserved.</p>
+        </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>    
+    </main>
+    </div>
+
+    
+    <script>
+        var isRTL = 0;
+    </script>
+    <!-- jQuery -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <!--  Bootstrap 5 -->
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- Metis Menu -->
+    <script src="../js/metis-menu.min.js"></script>
+    <!-- date ranger -->
+    <script src="../js/moment.min.js"></script>
+    <script src="../js/daterangepicker.min.js"></script>
+    <!-- sweet alert -->
+    <script src="../js/sweetalert2@11.min.js"></script>
+    <script src="../js/select2.min.js"></script>
+    
+    <script src="../js/jquery-ui.js"></script>
+    
+    <script src="../js/toastr.js"></script>
+    <script type="text/javascript"></script>
+        
+    <script src="../js/tooltip.js"></script>
+    <script src="../js/theme.js" async></script>
+    <!-- Input Tags -->
+    <script src="../js/tagsinput.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/main1.js"></script>
+  
+
+    
+    <script src="../js/jquery.mCustomScrollbar.min.js"></script>
+
+    <script src="../js/fullcalendar.js"></script>
+    <script src="../js/tempus-dominus.min.js" crossorigin="anonymous"></script>
+  
+
+        
+    <script src="../js/axios.js"></script>
+    
+    <script>
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+    </script>
+    <script src="../js/configuration.js"></script>
+    <script>
+        // sidebar_scrollbar_active 
+        $(".sidebar_scrollbar_active").mCustomScrollbar({
+            setTop: 0,
+            autoHideScrollbar : true,
+            mouseWheel : true,
+        });
+        if ($(".card_scroll_active .card-body").length > 0) {
+            $(".card_scroll_active .card-body").mCustomScrollbar({
+                setTop: 0,
+                autoHideScrollbar: true,
+                mouseWheel: true,
+            });
+        }
+        function responsiveScroll(){
+            $(".table_scrollbar_active").mCustomScrollbar({
+                axis:"x" ,
+                setHeight: false,
+                setWidth: false
+            });
+        }
+
+        responsiveScroll()
+
+    </script>    
+
+    
+    
+    
+    <script src="../js/data-table.js"></script>
+    
+    <script src="../js/echarts.min.js"></script>
+    <script type="module" src="../js/dashboard.js"></script>
+    <script src="../js/backend_common.js"></script>
+    <script src="../js/app.script.js"></script>
+
+    <script src="../js/cute-alert.js"></script>
+
+    <script>
+    
+                    </script>
+
+
+<div class="modal fade lead-modal" id="callModal"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content data">
+            <div class="modal-header modal-header-image mb-3">
+                <h5 class="modal-title text-white" id="_modal_tile">Add Call Logs </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="las la-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="_modal_body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function callModal(url, id){ 
+        let data = {
+            id: id,
+            _token: "ZprxWVDLTRCw5kHDKJFzqNBqCn96I57VfmS6mPKm",
+            url: url
+        };
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            success: function (data) {
+                $('#_modal_tile').html(data.title);
+                $('#_modal_body').html(data.body);
+                $('#callModal').modal('show');
+            },
+            error: function (data) {
+            }
+        });
+    }
+</script>
+
+</body>
+
+</html>
